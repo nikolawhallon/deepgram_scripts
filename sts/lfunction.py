@@ -57,7 +57,7 @@ async def run():
             stream.close()
 
         async def sender(ws):
-            with open('basic.json', 'r') as file:
+            with open('lfunction.json', 'r') as file:
                 config_message = json.load(file)
 
                 await ws.send(json.dumps(config_message))
@@ -77,6 +77,14 @@ async def run():
                     async for message in ws:
                         if isinstance(message, str):
                             print(message)
+
+                            decoded = json.loads(message)
+
+                            if decoded['type'] == 'FunctionCallRequest':
+                                for function in decoded['functions']:
+                                    if function['name'] == 'get_weather':
+                                       response = { "type": "FunctionCallResponse", "id": function['id'], "name": function['name'], "content": "Sunny." }
+                                       await ws.send(json.dumps(response))
 
                             # handle barge-in
                             if decoded['type'] == 'UserStartedSpeaking':

@@ -1,0 +1,35 @@
+{
+    "type": "Settings",
+    "audio": {
+        "input": {
+            "encoding": "linear16",
+            "sample_rate": 48000
+        },
+        "output": {
+            "encoding": "linear16",
+            "sample_rate": 48000,
+            "container": "none"
+        }
+    },
+    "agent": {
+        "listen": {
+            "provider": {
+                "type": "deepgram",
+                "model": "nova-2"
+            }
+        },
+        "think": {
+            "provider": {
+                "type": "open_ai",
+                "model": "gpt-4o-mini"
+            },
+            "prompt": "You are a helpful voice assistant created by Deepgram."
+        },
+        "speak": {
+            "provider": {
+                "type": "deepgram",
+                "model": "aura-2-odysseus-en"
+            }
+        }
+    }
+}
