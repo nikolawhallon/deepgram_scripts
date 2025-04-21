@@ -78,6 +78,8 @@ async def run():
                         if isinstance(message, str):
                             print(message)
 
+                            decoded = json.loads(message)
+
                             # handle barge-in
                             if decoded['type'] == 'UserStartedSpeaking':
                                 speaker.stop()
